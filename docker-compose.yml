@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  main:
+    image: node:16-alpine
+    volumes: [".:/app"]
+    working_dir: /app
+    command: node index.js
+    depends_on:
+      - redis
+      - postgres
+
+  redis:
+    image: redis:6
+
+  postgres:
+    image: postgres:14-alpine
+    environment:
+      - POSTGRES_PASSWORD=postgres
